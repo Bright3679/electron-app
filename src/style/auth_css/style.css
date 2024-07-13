@@ -1,0 +1,131 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #d5f0f3;
+}
+
+.login-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container label {
+  text-align: left;
+  margin-bottom: 5px;
+  /* font-weight: bold; */
+}
+
+.login-container input,
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.login-container input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+
+}
+
+.login-container button {
+  border: none;
+  border-radius: 4px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+  background-color: #45a049;
+}
+
+#registerBtn {
+  background-color: #007bff;
+}
+
+#registerUserBtn {
+  background-color: #007bff;
+}
+
+#registerBtn:hover,
+#registerUserBtn:hover {
+  background-color: #0056b3;
+}
+
+.login-container p {
+  font-size: 14px;
+  color: #888;
+}
+
+.register-link,
+.login-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.register-link {
+  background-color: #007bff;
+}
+
+.register-link:hover {
+  background-color: #0056b3;
+}
+
+.login-link {
+  background-color: #4caf50;
+}
+
+.login-link:hover {
+  background-color: #45a049;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+#showPassword {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-right: 10px;
+}
