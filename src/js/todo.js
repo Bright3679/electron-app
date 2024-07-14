@@ -1,4 +1,7 @@
-document.addEventListener('DOMContentLoaded', loadTasks);
+document.addEventListener('DOMContentLoaded', () => {
+    loadTasks();
+    showPage('all');
+});
 
 function addTask() {
     const taskInput = document.getElementById('new-task');
@@ -53,7 +56,6 @@ function editTask(button) {
     document.getElementById('edit-task-due-date').value = dueDate;
     document.getElementById('edit-modal').style.display = 'block';
 
-    // Save the task being edited in a global variable
     window.currentTask = task;
 }
 
@@ -144,3 +146,8 @@ function loadTasks() {
         taskList.appendChild(newTask);
     });
 }
+
+function showPage(category) {
+    filterTasks(category);
+}
+

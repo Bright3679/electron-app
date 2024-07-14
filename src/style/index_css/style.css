@@ -1,48 +1,72 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.navbar {
+    background-color: #007bff;
+    padding: 10px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+    gap: 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar a:hover {
+    background-color: #0056b3;
 }
 
 .container {
     background: white;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    width: 450px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    box-sizing: border-box;
 }
 
 h1 {
-    margin-top: 0;
     text-align: center;
+    color: #333;
 }
 
 .input-container {
     display: flex;
-    margin-bottom: 20px;
     flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
 input[type="text"], select, input[type="date"] {
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    flex: 1 1 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    flex: 1 1 auto;
+    min-width: 150px;
 }
 
 button {
-    padding: 10px;
+    padding: 10px 20px;
     border: none;
     background-color: #28a745;
     color: white;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -57,9 +81,14 @@ ul {
 li {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
     align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+li:hover {
+    background-color: #f9f9f9;
 }
 
 li.completed .task-text {
@@ -71,10 +100,11 @@ li .delete-btn, li .edit-btn {
     background-color: #dc3545;
     border: none;
     color: white;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
     padding: 5px 10px;
     margin-left: 10px;
+    transition: background-color 0.3s ease;
 }
 
 li .edit-btn {
@@ -89,20 +119,6 @@ li .delete-btn:hover {
     background-color: #c82333;
 }
 
-.filter-container {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
-
-.filter-container button {
-    background-color: #007bff;
-}
-
-.filter-container button:hover {
-    background-color: #0056b3;
-}
-
 /* Modal styles */
 .modal {
     display: none;
@@ -113,18 +129,19 @@ li .delete-btn:hover {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.5);
     padding-top: 60px;
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: #fff;
     margin: 5% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid #ddd;
     width: 80%;
     max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .close {
@@ -132,23 +149,24 @@ li .delete-btn:hover {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
 .close:hover, .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+    color: #000;
 }
 
 .modal h2 {
     text-align: center;
     margin-top: 0;
+    color: #333;
 }
 
 .modal input[type="text"], .modal select, .modal input[type="date"] {
     width: calc(100% - 22px);
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
