@@ -10,41 +10,37 @@ function createWindow() {
             preload: path.join(__dirname, '/src/js/preload.js'),
             nodeIntegration: true,
             contextIsolation: true,
-            allowRunningInsecureContent: true
+            allowRunningInsecureContent: false
         }
     });
 
     mainWindow.loadFile(path.join(__dirname, '/src/pages/login.html'));
 }
 
-const serverApp = createServer();
-const PORT = process.env.PORT || 3000;
-const server = serverApp.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-    // console.log("Server is running on :", PORT)
-});
+let serverApp;
 
 app.whenReady().then(() => {
-    createWindow()
+    createWindow();
+
+    serverApp = createServer();
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow()
+            createWindow();
         }
-    })
-})
+    });
+});
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
-        app.quit()
-    }
-})
-app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-        createWindow();
+        app.quit();
     }
 });
 
 app.on('quit', () => {
-    server.close();
+    if (serverApp) {
+        serverApp.close(() => {
+            console.log('Server closed');
+        });
+    }
 });

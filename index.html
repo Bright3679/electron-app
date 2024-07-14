@@ -3,17 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To-Do List</title>
+    <title>Enhanced To-Do List</title>
     <link rel="stylesheet" href="./src/style/index_css/style.css" />
   </head>
   <body>
     <div class="container">
-      <h1>To-Do List</h1>
+      <h1>Enhanced To-Do List</h1>
       <div class="input-container">
         <input type="text" id="new-task" placeholder="Add a new task..." />
+        <select title="..." id="category">
+          <option value="work">Work</option>
+          <option value="personal">Personal</option>
+        </select>
+        <select title="..." id="priority">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+        <input title="..." type="date" id="due-date" />
         <button onclick="addTask()">Add</button>
       </div>
+      <div class="filter-container">
+        <button onclick="filterTasks('all')">All</button>
+        <button onclick="filterTasks('work')">Work</button>
+        <button onclick="filterTasks('personal')">Personal</button>
+        <button onclick="filterTasks('completed')">Completed</button>
+      </div>
       <ul id="task-list"></ul>
+    </div>
+
+    <!-- Modal for editing tasks -->
+    <div id="edit-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Edit Task</h2>
+        <input title="..." type="text" id="edit-task-text" />
+        <select title="..." id="edit-task-priority">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+        <input title="..." type="date" id="edit-task-due-date" />
+        <button onclick="saveTask()">Save</button>
+      </div>
     </div>
 
     <script src="./src/js/todo.js"></script>

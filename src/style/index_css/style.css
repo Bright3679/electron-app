@@ -13,7 +13,7 @@ body {
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    width: 300px;
+    width: 450px;
 }
 
 h1 {
@@ -24,14 +24,16 @@ h1 {
 .input-container {
     display: flex;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
-input[type="text"] {
-    flex: 1;
+input[type="text"], select, input[type="date"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
     margin-right: 10px;
+    margin-bottom: 10px;
+    flex: 1 1 100%;
 }
 
 button {
@@ -57,17 +59,96 @@ li {
     justify-content: space-between;
     padding: 10px;
     border-bottom: 1px solid #ccc;
+    align-items: center;
 }
 
-li .delete-btn {
+li.completed .task-text {
+    text-decoration: line-through;
+    color: grey;
+}
+
+li .delete-btn, li .edit-btn {
     background-color: #dc3545;
     border: none;
     color: white;
     border-radius: 3px;
     cursor: pointer;
     padding: 5px 10px;
+    margin-left: 10px;
+}
+
+li .edit-btn {
+    background-color: #ffc107;
+}
+
+li .edit-btn:hover {
+    background-color: #e0a800;
 }
 
 li .delete-btn:hover {
     background-color: #c82333;
+}
+
+.filter-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.filter-container button {
+    background-color: #007bff;
+}
+
+.filter-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal h2 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.modal input[type="text"], .modal select, .modal input[type="date"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
