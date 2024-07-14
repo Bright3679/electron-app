@@ -7,27 +7,28 @@
     <link rel="stylesheet" href="./src/style/index_css/style.css" />
   </head>
   <body>
-    <div class="navbar">
-      <a href="#" onclick="showPage('all')">All Tasks</a>
-      <a href="#" onclick="showPage('work')">Work</a>
-      <a href="#" onclick="showPage('personal')">Personal</a>
-      <a href="#" onclick="showPage('completed')">Completed</a>
-    </div>
     <div class="container">
       <h1>Enhanced To-Do List</h1>
+      <button onclick="logout()" class="logout-btn">Logout</button>
       <div class="input-container">
         <input type="text" id="new-task" placeholder="Add a new task..." />
-        <select title="Category" id="category">
+        <select title="..." id="category">
           <option value="work">Work</option>
           <option value="personal">Personal</option>
         </select>
-        <select title="Priority" id="priority">
+        <select title="..." id="priority">
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
-        <input title="Due Date" type="date" id="due-date" />
+        <input title="..." type="date" id="due-date" />
         <button onclick="addTask()">Add</button>
+      </div>
+      <div class="filter-container">
+        <button onclick="showPage('all')">All</button>
+        <button onclick="showPage('work')">Work</button>
+        <button onclick="showPage('personal')">Personal</button>
+        <button onclick="showPage('completed')">Completed</button>
       </div>
       <ul id="task-list"></ul>
     </div>
@@ -36,13 +37,13 @@
       <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <h2>Edit Task</h2>
-        <input title="Task" type="text" id="edit-task-text" />
-        <select title="Priority" id="edit-task-priority">
+        <input title="..." type="text" id="edit-task-text" />
+        <select title="..." id="edit-task-priority">
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
-        <input title="Due Date" type="date" id="edit-task-due-date" />
+        <input title="..." type="date" id="edit-task-due-date" />
         <button onclick="saveTask()">Save</button>
       </div>
     </div>

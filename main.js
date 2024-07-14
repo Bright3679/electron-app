@@ -10,7 +10,7 @@ function createWindow() {
             preload: path.join(__dirname, '/src/js/preload.js'),
             nodeIntegration: true,
             contextIsolation: true,
-            allowRunningInsecureContent: false
+            allowRunningInsecureContent: true
         }
     });
 

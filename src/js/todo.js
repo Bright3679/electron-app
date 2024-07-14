@@ -1,6 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    loadTasks();
-    showPage('all');
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+        window.location.href = 'src/pages/login.html';
+    } else {
+        loadTasks();
+        showPage('all');
+    }
 });
 
 function addTask() {
@@ -107,6 +112,7 @@ function filterTasks(category) {
 
 function saveTasks() {
     const tasks = [];
+    const currentUser = localStorage.getItem('currentUser');
     document.querySelectorAll('#task-list li').forEach(task => {
         tasks.push({
             text: task.querySelector('.task-text').textContent,
@@ -116,11 +122,12 @@ function saveTasks() {
             completed: task.classList.contains('completed')
         });
     });
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem(`tasks_${currentUser}`, JSON.stringify(tasks));
 }
 
 function loadTasks() {
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const currentUser = localStorage.getItem('currentUser');
+    const tasks = JSON.parse(localStorage.getItem(`tasks_${currentUser}`)) || [];
     const taskList = document.getElementById('task-list');
     tasks.forEach(taskData => {
         const newTask = document.createElement('li');
@@ -151,3 +158,7 @@ function showPage(category) {
     filterTasks(category);
 }
 
+function logout() {
+    localStorage.removeItem('currentUser');
+    window.location.href = 'src/pages/login.html';
+}

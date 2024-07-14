@@ -119,7 +119,6 @@ li .delete-btn:hover {
     background-color: #c82333;
 }
 
-/* Modal styles */
 .modal {
     display: none;
     position: fixed;
@@ -169,4 +168,19 @@ li .delete-btn:hover {
     margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
+}
+
+.logout-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
 }

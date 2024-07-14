@@ -51,6 +51,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const message = document.getElementById("message");
     const registerBtn = document.getElementById("registerBtn");
 
+    username.addEventListener('input', function () {
+        if (username.value.length < 3) {
+            username.setCustomValidity('Username must be at least 3 characters long.');
+            username.reportValidity();
+        } else {
+            username.setCustomValidity('');
+        }
+    });
+
+    password.addEventListener('input', function () {
+        if (password.value.length < 6) {
+            password.setCustomValidity('Password must be at least 6 characters long.');
+            password.reportValidity();
+        } else {
+            password.setCustomValidity('');
+        }
+    });
+
     function checkPasswordMatch() {
         if (password.value === confirmPassword.value) {
             message.style.color = "green";
@@ -61,6 +79,18 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    ['copy', 'paste', 'cut'].forEach(event => {
+        password.addEventListener(event, function (e) {
+            e.preventDefault();
+        });
+    });
+
+    ['copy', 'paste', 'cut'].forEach(event => {
+        confirmPassword.addEventListener(event, function (e) {
+            e.preventDefault();
+        });
+    });
+
     password.addEventListener("input", checkPasswordMatch);
     confirmPassword.addEventListener("input", checkPasswordMatch);
 
@@ -70,20 +100,48 @@ document.addEventListener("DOMContentLoaded", function () {
         confirmPassword.setAttribute("type", type);
     });
 
-
     registerBtn.addEventListener("click", async () => {
-        if (password.value !== confirmPassword.value) {
+        const usernameValue = username.value;
+        const passwordValue = password.value;
+
+        if (usernameValue.length < 3) {
             Swal.fire({
                 title: "Error",
-                text: "Passwords do not match!",
+                text: "Username must be at least 3 characters long.",
                 icon: "error",
-                backdrop: false
+                backdrop: false,
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false
             });
             return;
         }
 
-        const usernameValue = username.value;
-        const passwordValue = password.value;
+        if (passwordValue.length < 6) {
+            Swal.fire({
+                title: "Error",
+                text: "Password must be at least 6 characters long.",
+                icon: "error",
+                backdrop: false,
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+            return;
+        }
+
+        if (passwordValue !== confirmPassword.value) {
+            Swal.fire({
+                title: "Error",
+                text: "Passwords do not match!",
+                icon: "error",
+                backdrop: false,
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+            return;
+        }
 
         try {
             const response = await fetch('http://localhost:3000/api/register', {
@@ -96,12 +154,14 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.json();
 
             if (response.ok) {
-                // message.innerText = 'User registered successfully!';
                 Swal.fire({
                     title: "Success",
                     text: "User registered successfully!",
                     icon: "success",
-                    backdrop: false
+                    backdrop: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    showConfirmButton: false
                 }).then(() => {
                     window.location.href = '../pages/login.html';
                 });
@@ -111,7 +171,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     title: "Error",
                     text: data.message,
                     icon: "error",
-                    backdrop: false
+                    backdrop: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    showConfirmButton: false
                 });
             }
         } catch (err) {
@@ -121,7 +184,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 title: "Error",
                 text: err.message,
                 icon: "error",
-                backdrop: false
+                backdrop: false,
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false
             });
         }
     });

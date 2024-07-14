@@ -58,6 +58,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const password = document.getElementById("password");
     const showPasswordCheckbox = document.getElementById("showPassword");
 
+    ['copy', 'paste', 'cut'].forEach(event => {
+        password.addEventListener(event, function (e) {
+            e.preventDefault();
+        });
+    });
+
     showPasswordCheckbox.addEventListener("change", function () {
         const type = showPasswordCheckbox.checked ? "text" : "password";
         password.setAttribute("type", type);
@@ -84,7 +90,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     title: "Success",
                     text: 'Login successful!',
                     icon: "success",
-                    backdrop: false
+                    backdrop: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    showConfirmButton: false
                 }).then(() => {
                     window.location.href = '../../index.html'
                 })
@@ -94,7 +103,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     title: "Error",
                     text: data.message,
                     icon: "error",
-                    backdrop: false
+                    backdrop: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    showConfirmButton: false
                 });
             }
         } catch (err) {
@@ -104,7 +116,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 title: "Error",
                 text: err.message,
                 icon: "error",
-                backdrop: false
+                backdrop: false,
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false
             });
         }
     })
