@@ -3,51 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Enhanced To-Do List</title>
+    <title>Todo List App</title>
     <link rel="stylesheet" href="./src/style/index_css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
-    <div class="container">
-      <h1>Enhanced To-Do List</h1>
-      <button onclick="logout()" class="logout-btn">Logout</button>
-      <div class="input-container">
-        <input type="text" id="new-task" placeholder="Add a new task..." />
-        <select title="..." id="category">
-          <option value="work">Work</option>
-          <option value="personal">Personal</option>
-        </select>
-        <select title="..." id="priority">
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-        <input title="..." type="date" id="due-date" />
-        <button onclick="addTask()">Add</button>
-      </div>
-      <div class="filter-container">
-        <button onclick="showPage('all')">All</button>
-        <button onclick="showPage('work')">Work</button>
-        <button onclick="showPage('personal')">Personal</button>
-        <button onclick="showPage('completed')">Completed</button>
-      </div>
-      <ul id="task-list"></ul>
+    <div class="todo-container">
+      <header>
+        <h1>Todo List</h1>
+      </header>
+      <form id="todo-form">
+        <input type="text" id="todo-input" placeholder="Add a new task" />
+        <button type="submit">Add Task</button>
+      </form>
+      <div class="todo-list" id="todo-list"></div>
+      <footer>
+        <button id="delete-all-btn">Delete All</button>
+      </footer>
     </div>
-
-    <div id="edit-modal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h2>Edit Task</h2>
-        <input title="..." type="text" id="edit-task-text" />
-        <select title="..." id="edit-task-priority">
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-        <input title="..." type="date" id="edit-task-due-date" />
-        <button onclick="saveTask()">Save</button>
-      </div>
-    </div>
-
-    <script src="./src/js/todo.js"></script>
+    <script src="./src/js/index.js"></script>
   </body>
 </html>

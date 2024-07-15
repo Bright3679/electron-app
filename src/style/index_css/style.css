@@ -1,186 +1,196 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5;
-    margin: 0;
-    padding: 0;
-    display: flex;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #d5f0f3;
+}
+
+.todo-container {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 500px;
+  height: 80vh; 
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #4caf50;
+  padding-bottom: 5px;
+  font-size: 20px;
+  color: #4caf50;
+}
+
+form {
+  display: flex;
+  margin-bottom: 10px;
+  gap: 5px;
+}
+
+form input[type="text"] {
+  flex: 1;
+  padding: 8px;
+  font-size: 14px; 
+  border: 2px solid #4caf50;
+  border-radius: 4px;
+  outline: none;
+}
+
+form button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
+.todo-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+}
+
+.todo-item:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.task-number {
+  width: 16px; 
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.task-text {
+  flex: 1;
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.task-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 3px; 
+}
+
+.complete-btn,
+.edit-btn,
+.delete-btn {
+  padding: 6px 8px; 
+  font-size: 12px; 
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.complete-btn {
+  background-color: #28a745;
+}
+
+.edit-btn {
+  background-color: #007bff;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+}
+
+.complete-btn:hover {
+  background-color: #218838;
+}
+
+.edit-btn:hover {
+  background-color: #1e88e5;
+}
+
+.delete-btn:hover {
+  background-color: #e53935;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #888;
+}
+
+footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+footer button {
+  padding: 6px 12px;
+  font-size: 14px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+footer button:hover {
+  background-color: #e53935;
+}
+
+.edit-input {
+  width: 100%;
+  padding: 6px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  .todo-container {
+    padding: 10px;
+    height: 80vh;
+  }
+
+  form {
     flex-direction: column;
-    height: 100vh;
-}
+    gap: 5px;
+  }
 
-.navbar {
-    background-color: #007bff;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.navbar a {
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.navbar a:hover {
-    background-color: #0056b3;
-}
-
-.container {
-    background: white;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+  form input[type="text"],
+  form button {
     width: 100%;
-    max-width: 600px;
-    margin: 20px auto;
-    box-sizing: border-box;
-}
+  }
 
-h1 {
-    text-align: center;
-    color: #333;
-}
+  .task-actions {
+    flex-direction: column;
+  }
 
-.input-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-input[type="text"], select, input[type="date"] {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    flex: 1 1 auto;
-    min-width: 150px;
-}
-
-button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #28a745;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #218838;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    transition: background-color 0.3s ease;
-}
-
-li:hover {
-    background-color: #f9f9f9;
-}
-
-li.completed .task-text {
-    text-decoration: line-through;
-    color: grey;
-}
-
-li .delete-btn, li .edit-btn {
-    background-color: #dc3545;
-    border: none;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 5px 10px;
-    margin-left: 10px;
-    transition: background-color 0.3s ease;
-}
-
-li .edit-btn {
-    background-color: #ffc107;
-}
-
-li .edit-btn:hover {
-    background-color: #e0a800;
-}
-
-li .delete-btn:hover {
-    background-color: #c82333;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
+  .complete-btn,
+  .edit-btn,
+  .delete-btn {
     width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding-top: 60px;
-}
-
-.modal-content {
-    background-color: #fff;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.close:hover, .close:focus {
-    color: #000;
-}
-
-.modal h2 {
-    text-align: center;
-    margin-top: 0;
-    color: #333;
-}
-
-.modal input[type="text"], .modal select, .modal input[type="date"] {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.logout-btn {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    transition: background-color 0.3s ease;
-}
-
-.logout-btn:hover {
-    background-color: #c82333;
+    padding: 6px 8px;
+    font-size: 12px; 
+  }
 }

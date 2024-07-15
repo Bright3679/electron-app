@@ -1,48 +1,3 @@
-// document.getElementById('registerBtn').addEventListener('click', async () => {
-//     const username = document.getElementById('username').value;
-//     const password = document.getElementById('password').value;
-
-//     try {
-//         const response = await fetch('http://localhost:3000/api/register', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({ username, password })
-//         });
-//         const data = await response.json();
-
-//         if (response.ok) {
-//             document.getElementById('message').innerText = 'User registered successfully!';
-//             Swal.fire({
-//                 title: "Success",
-//                 text: "User registered successfully!",
-//                 icon: "success",
-//                 backdrop: false
-//             }).then(() => {
-//                 window.location.href = '../pages/login.html';
-//             })
-//         } else {
-//             document.getElementById('message').innerText = data.message;
-//             Swal.fire({
-//                 title: "Error",
-//                 text: data.message,
-//                 icon: "error",
-//                 backdrop: false
-//             });
-//         }
-//     } catch (err) {
-//         console.error(err);
-//         document.getElementById('message').innerText = `Error: ${err.message}`;
-//         Swal.fire({
-//             title: "Error",
-//             text: err.message,
-//             icon: "error",
-//             backdrop: false
-//         });
-//     }
-// });
-
 document.addEventListener("DOMContentLoaded", function () {
     const username = document.getElementById("username");
     const password = document.getElementById("password");
@@ -110,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 text: "Username must be at least 3 characters long.",
                 icon: "error",
                 backdrop: false,
-                timer: 2000,
+                timer: 1000,
                 timerProgressBar: true,
                 showConfirmButton: false
             });
@@ -123,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 text: "Password must be at least 6 characters long.",
                 icon: "error",
                 backdrop: false,
-                timer: 2000,
+                timer: 1000,
                 timerProgressBar: true,
                 showConfirmButton: false
             });
@@ -136,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 text: "Passwords do not match!",
                 icon: "error",
                 backdrop: false,
-                timer: 2000,
+                timer: 1000,
                 timerProgressBar: true,
                 showConfirmButton: false
             });
@@ -159,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     text: "User registered successfully!",
                     icon: "success",
                     backdrop: false,
-                    timer: 2000,
+                    timer: 1000,
                     timerProgressBar: true,
                     showConfirmButton: false
                 }).then(() => {
@@ -172,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     text: data.message,
                     icon: "error",
                     backdrop: false,
-                    timer: 2000,
+                    timer: 1000,
                     timerProgressBar: true,
                     showConfirmButton: false
                 });
@@ -185,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 text: err.message,
                 icon: "error",
                 backdrop: false,
-                timer: 2000,
+                timer: 1000,
                 timerProgressBar: true,
                 showConfirmButton: false
             });

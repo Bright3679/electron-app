@@ -61,7 +61,11 @@ exports.login = async (req, res) => {
         }
 
         const token = jwt.sign(
-            { username: user[0].name, sessionId: uuidv4() },
+            {
+                personID: user[0].personID,
+                name: user[0].name,
+                password: user[0].password
+            },
             process.env.JWT_SECRET,
             { expiresIn: '1h' }
         );
@@ -72,3 +76,23 @@ exports.login = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+
+exports.getUserDetails = async (req, res) => {
+    let userId = req.user.personID;
+    let username = req.user.name;
+    let password = req.user.password;
+    try {
+        const query = 'SELECT * FROM Persons WHERE personID = @userId AND name = @username AND password = @password';
+        const userDetails = await executeQuery(query, { userId, username, password });
+
+        if (userDetails.length === 0) {
+            return res.status(404).json({ message: 'User details not found' });
+        }
+
+        res.json({ data: userDetails });
+    } catch (err) {
+        console.error('Error fetching user details:', err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
