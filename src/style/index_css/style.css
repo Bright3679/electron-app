@@ -194,3 +194,29 @@ footer button:hover {
     font-size: 12px; 
   }
 }
+
+form button,
+.complete-btn,
+.edit-btn,
+.delete-btn,
+footer button {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+form button:hover,
+.complete-btn:hover,
+.edit-btn:hover,
+.delete-btn:hover,
+footer button:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.todo-item {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.todo-item:hover {
+  background-color: #e6f7ff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
