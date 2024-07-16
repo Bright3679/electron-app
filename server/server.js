@@ -22,6 +22,7 @@ function createServer(app) {
 
     expressApp.use(cors());
     expressApp.use(bodyParser.json());
+    // expressApp.use(express.json());
 
     expressApp.use((req, res, next) => {
         const startTime = new Date();

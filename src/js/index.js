@@ -4,12 +4,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const todoList = document.getElementById('todo-list');
     const deleteAllBtn = document.getElementById('delete-all-btn');
 
-    todoForm.addEventListener('submit', (e) => {
+    const token = localStorage.getItem('token');
+
+    todoForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const taskText = todoInput.value.trim();
-        if (taskText) {
-            addTodoItem(taskText);
-            todoInput.value = '';
+        const task = todoInput.value.trim();
+        if (task === '') {
+            Swal.fire({
+                title: 'Input Task',
+                text: 'Please enter a task!',
+                icon: 'error',
+                backdrop: false,
+                timer: 1000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            })
+        }
+        try {
+            const response = await fetch('http://localhost:3000/api/insertTask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ token, task })
+            })
+            const data = await response.json();
+
+            if (response.ok) {
+                // Swal.fire('Success', 'Task inserted successfully', 'success');
+                addTodoItem(task);
+                todoInput.value = '';
+            } else {
+                // Swal.fire('Error', data.message || 'Error inserting task', 'error');
+                Swal.fire({
+                    title: 'Error',
+                    text: data.message || 'Error inserting task',
+                    icon: 'error',
+                    backdrop: false,
+                    timer: 1000,
+                    // timerProgressBar: true,
+                    showConfirmButton: false
+                })
+            }
+            // .then(response => response.json())
+            // .then(data => {
+            //     console.log(`Task ${taskText} inserted successfully:`, data);
+            // })
+        } catch (error) {
+            console.error("Error:", error)
         }
     });
 
@@ -17,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         todoList.innerHTML = '';
     });
 
-    function addTodoItem(text) {
+    function addTodoItem(task) {
         const todoCount = todoList.children.length + 1;
         const todoItem = document.createElement('div');
         todoItem.className = 'todo-item';
@@ -25,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         todoItem.innerHTML = `
         <div class="task-number">${todoCount}</div>
-        <div class="task-text">${text}</div>
+        <div class="task-text">${task}</div>
         <div class="task-actions">
           <button class="complete-btn" onclick="completeTodoItem('todo-item-${todoCount}')">Complete</button>
           <button class="edit-btn" onclick="editTodoItem('todo-item-${todoCount}')">Edit</button>

@@ -20,11 +20,12 @@
     "electronmon": "^2.0.3",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "msnodesqlv8": "^4.2.1",
     "mssql": "^11.0.1",
     "nodemon": "^3.1.4",
     "sweetalert": "^2.1.2",
-    "sweetalert2": "^11.12.2",
+    "sweetalert2": "^11.6.13",
     "tedious": "^18.2.3",
     "uuid": "^10.0.0"
   },
@@ -33,6 +34,6 @@
   },
   "description": "",
   "devDependencies": {
-    "electron-forge": "^5.2.4"
+    "electron-forge": "^2.0.0"
   }
 }
