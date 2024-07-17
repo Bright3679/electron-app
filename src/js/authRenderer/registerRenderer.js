@@ -106,25 +106,48 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 body: JSON.stringify({ username: usernameValue, password: passwordValue })
             });
-            const data = await response.json();
-
+            const registerData = await response.json();
             if (response.ok) {
-                Swal.fire({
-                    title: "Success",
-                    text: "User registered successfully!",
-                    icon: "success",
-                    backdrop: false,
-                    timer: 1000,
-                    timerProgressBar: true,
-                    showConfirmButton: false
-                }).then(() => {
-                    window.location.href = '../pages/login.html';
-                });
+                const logicResponse = await fetch('http://localhost:3000/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username: usernameValue, password: passwordValue })
+                })
+                const loginData = await logicResponse.json();
+
+                if (logicResponse.ok) {
+                    localStorage.setItem('token', loginData.token);
+                    Swal.fire({
+                        title: "Success",
+                        text: "User registered successfully!",
+                        icon: "success",
+                        backdrop: false,
+                        timer: 1000,
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    }).then(() => {
+                        // window.location.href = '../pages/login.html';
+                        window.location.href = '../../index.html'
+                    });
+                } else {
+                    message.innerText = loginData.message;
+                    Swal.fire({
+                        title: "Error",
+                        text: loginData.message,
+                        icon: "error",
+                        backdrop: false,
+                        timer: 1000,
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    })
+                }
             } else {
-                message.innerText = data.message;
+                message.innerText = registerData.message;
                 Swal.fire({
                     title: "Error",
-                    text: data.message,
+                    text: registerData.message,
                     icon: "error",
                     backdrop: false,
                     timer: 1000,

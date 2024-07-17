@@ -67,7 +67,7 @@ exports.login = async (req, res) => {
                 password: user[0].password
             },
             process.env.JWT_SECRET,
-            { expiresIn: '1m' }
+            { expiresIn: '1h' }
         );
 
         res.json({ message: 'Login successful', token });
