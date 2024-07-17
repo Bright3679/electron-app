@@ -1,10 +1,28 @@
 {
   "name": "electron-app",
   "version": "1.0.0",
+  "description": "todo app ",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "electronmon ."
+    "test": "electronmon .",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "productName": "TodoApp",
+    "icon": "todo.png",
+    "files": [
+      "**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "todo.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "createDesktopShortcut": true,
+      "allowToChangeInstallationDirectory": true
+    }
   },
   "keywords": [],
   "author": "",
@@ -16,12 +34,10 @@
     "cli-color": "^2.0.4",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "electron": "^31.2.0",
     "electronmon": "^2.0.3",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
-    "msnodesqlv8": "^4.2.1",
     "mssql": "^11.0.1",
     "nodemon": "^3.1.4",
     "sweetalert": "^2.1.2",
@@ -29,11 +45,8 @@
     "tedious": "^18.2.3",
     "uuid": "^10.0.0"
   },
-  "directories": {
-    "test": "test"
-  },
-  "description": "",
   "devDependencies": {
-    "electron-forge": "^2.0.0"
+    "electron": "^31.2.1",
+    "electron-builder": "^24.13.3"
   }
 }
