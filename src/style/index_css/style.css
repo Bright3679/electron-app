@@ -29,6 +29,13 @@ header {
   color: #4caf50;
 }
 
+#user-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+
 form {
   display: flex;
   margin-bottom: 10px;
@@ -151,6 +158,26 @@ footer button {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+footer button:last-child {
+  margin-right: 0; 
+}
+footer button#show-button{
+  background-color: #2196F3; 
+}
+
+footer button#show-button:hover {
+  background-color: #0D47A1; 
+}
+
+footer button#logout-btn{
+  background-color: #F44336; 
+} 
+
+footer button#logout-btn:hover{
+  background-color: #E53935; 
 }
 
 footer button:hover {

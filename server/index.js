@@ -3,8 +3,6 @@ let authentication = require('./routes/authentication');
 let todoTasks = require('./routes/taskOperations')
 const router = express.Router();
 const authenticationCtrl = require('../middlewares/authenticationCtrl')
-// const app = express();
-// app.use(express.json());
 
 // Auth APIs
 router.post('/login', authentication.login);
@@ -13,5 +11,6 @@ router.get('/getUserDetails', authenticationCtrl.authenticateToken, authenticati
 
 //Task Operations
 router.post('/insertTask', todoTasks.taskInsert)
+router.get('/gettasks', authenticationCtrl.authenticateToken, todoTasks.gettasks)
 
 module.exports = router;

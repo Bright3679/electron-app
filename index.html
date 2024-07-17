@@ -11,6 +11,7 @@
     <div class="todo-container">
       <header>
         <h1>Todo List</h1>
+        <p id="user-name"></p>
       </header>
       <form id="todo-form">
         <input type="text" id="todo-input" placeholder="Add a new task" />
@@ -18,7 +19,9 @@
       </form>
       <div class="todo-list" id="todo-list"></div>
       <footer>
-        <button id="delete-all-btn">Delete All</button>
+        <button type="button" id="show-button">Show your Todo-List</button>
+        <button type="button" id="logout-btn">Logout</button>
+        <button type="button" id="delete-all-btn">Delete All</button>
       </footer>
     </div>
     <script src="./src/js/index.js"></script>

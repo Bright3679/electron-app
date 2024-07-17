@@ -3,8 +3,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const todoInput = document.getElementById('todo-input');
     const todoList = document.getElementById('todo-list');
     const deleteAllBtn = document.getElementById('delete-all-btn');
+    const logoutBtn = document.getElementById('logout-btn')
+    const showtodoBtn = document.getElementById('show-button');
 
     const token = localStorage.getItem('token');
+    const fetchedTaskNames = new Set();
+    showtodoBtn.addEventListener('click', async () => {
+        if (token) {
+            try {
+                const response = await fetch('http://localhost:3000/api/gettasks', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch tasks');
+                }
+                const data = await response.json();
+                data.data.forEach(task => {
+                    if (!fetchedTaskNames.has(task.taskName)) {
+                        addTodoItem(task.taskName);
+                        fetchedTaskNames.add(task.taskName);
+                    }
+                });
+
+
+            } catch (error) {
+                console.error('Error fetching tasks:', error);
+            }
+        }
+
+    });
+
+
+    logoutBtn.addEventListener('click', function () {
+        Swal.fire({
+            title: "Confirm logout!",
+            text: "Are you sure you want to log out?",
+            icon: "question",
+            backdrop: false,
+            showCancelButton: true,
+            cancelButtonText: "Cancel",
+            confirmButtonText: "Logout",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem('token');
+                window.location.href = 'src/pages/login.html';
+            }
+        });
+    });
 
     todoForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -31,25 +79,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             if (response.ok) {
-                // Swal.fire('Success', 'Task inserted successfully', 'success');
                 addTodoItem(task);
                 todoInput.value = '';
             } else {
-                // Swal.fire('Error', data.message || 'Error inserting task', 'error');
                 Swal.fire({
-                    title: 'Error',
+                    // title: 'Error',
                     text: data.message || 'Error inserting task',
                     icon: 'error',
                     backdrop: false,
                     timer: 1000,
-                    // timerProgressBar: true,
                     showConfirmButton: false
                 })
             }
-            // .then(response => response.json())
-            // .then(data => {
-            //     console.log(`Task ${taskText} inserted successfully:`, data);
-            // })
         } catch (error) {
             console.error("Error:", error)
         }

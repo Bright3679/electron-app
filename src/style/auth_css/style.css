@@ -58,11 +58,13 @@ body {
   color: white;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .login-container button:hover {
   background-color: #45a049;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 }
 
 #registerBtn {
