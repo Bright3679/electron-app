@@ -1,40 +1,50 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const todoForm = document.getElementById('todo-form');
     const todoInput = document.getElementById('todo-input');
     const todoList = document.getElementById('todo-list');
-    const deleteAllBtn = document.getElementById('delete-all-btn');
+    const clearAll = document.getElementById('clear-all-btn');
     const logoutBtn = document.getElementById('logout-btn')
     const showtodoBtn = document.getElementById('show-button');
 
     const token = localStorage.getItem('token');
-    const fetchedTaskNames = new Set();
+
     showtodoBtn.addEventListener('click', async () => {
-        if (token) {
-            try {
-                const response = await fetch('http://localhost:3000/api/gettasks', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                if (!response.ok) {
-                    throw new Error('Failed to fetch tasks');
+        window.location.href = 'src/pages/showTasks.html';
+    })
+
+
+    const fetchedTaskNames = new Set();
+    if (token) {
+        try {
+            const response = await fetch('http://localhost:3000/api/gettasks', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
                 }
-                const data = await response.json();
-                data.data.forEach(task => {
-                    if (!fetchedTaskNames.has(task.taskName)) {
-                        addTodoItem(task.taskName);
-                        fetchedTaskNames.add(task.taskName);
-                    }
-                });
-
-
-            } catch (error) {
-                console.error('Error fetching tasks:', error);
+            });
+            if (!response.ok) {
+                // throw new Error('Failed to fetch tasks');
+                Swal.fire({
+                    text: 'No Tasks Available!',
+                    icon: 'error',
+                    backdrop: false,
+                    timer: 1000,
+                    showConfirmButton: false
+                })
             }
-        }
+            const data = await response.json();
+            data.data.forEach(task => {
+                if (!fetchedTaskNames.has(task.taskName)) {
+                    addTodoItem(task.taskName);
+                    fetchedTaskNames.add(task.taskName);
+                }
+            });
 
-    });
+
+        } catch (error) {
+            console.error('Error fetching tasks:', error);
+        }
+    }
 
 
     logoutBtn.addEventListener('click', function () {
@@ -96,8 +106,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    deleteAllBtn.addEventListener('click', () => {
+    clearAll.addEventListener('click', () => {
         todoList.innerHTML = '';
+        fetchedTaskNames.clear();
     });
 
     function addTodoItem(task) {

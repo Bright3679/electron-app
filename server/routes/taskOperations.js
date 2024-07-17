@@ -66,4 +66,14 @@ exports.gettasks = async (req, res) => {
     }
 }
 
-
+// exports.deleteTask = async (req, res) => {
+//     let prId = req.user.personID;
+//     try {
+//         const query = 'DELETE TaskName FROM Tasks WHERE personID = @prId';
+//         const updatedtask = await executeQuery(query, { prId })
+//         return res.status(200).send({ data: updatedtask });
+//     } catch (err) {
+//         console.error("Error showing Data", err);
+//         res.status(500).send({ message: 'Error showing Data' })
+//     }
+// }
