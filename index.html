@@ -11,7 +11,7 @@
     <div class="todo-container">
       <header>
         <h1>Todo List</h1>
-        <!-- <p id="user-name"></p> -->
+        <p id="user-name"></p>
       </header>
       <form id="todo-form">
         <input type="text" id="todo-input" placeholder="Add a new task" />
@@ -25,5 +25,35 @@
       </footer>
     </div>
     <script src="./src/js/indexRenderer/index.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const loginName = document.getElementById("user-name");
+        const token = localStorage.getItem("token");
+
+        function logout() {
+          localStorage.removeItem("token");
+          window.location.href = "./src/pages/login.html";
+        }
+
+        function checkTokenExpiration() {
+          if (!token) {
+            logout();
+            return;
+          }
+
+          const payload = JSON.parse(atob(token.split(".")[1]));
+          const expiration = payload.exp * 1000;
+
+          if (Date.now() >= expiration) {
+            alert("Your Session has expired!");
+            logout();
+          } else {
+            loginName.textContent = `Welcome, ${payload.name}`;
+          }
+        }
+
+        checkTokenExpiration();
+      });
+    </script>
   </body>
 </html>
