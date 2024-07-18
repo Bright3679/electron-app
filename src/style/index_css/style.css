@@ -10,57 +10,79 @@ body {
 
 .todo-container {
   background-color: #ffffff;
-  padding: 15px;
+  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   width: 90%;
-  /* max-width: 500px; */
-  height: 80vh; 
+  height: 80vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 header {
-  margin-bottom: 1px;
-  padding-bottom: 10px;
-  background-color: #ffffff;
+  background-color: #4CAF50; 
+  padding: 0.5px 20px;
+  border-radius: 8px 8px 8px 8px; 
   position: sticky;
   top: 0;
   z-index: 1;
-  padding: 10px;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
+
 
 header h1 {
   margin: 0;
   font-size: 24px;
+  color: #fff;
 }
 
 #user-name {
-  font-size: 1.2em;
+  font-size: 1.5em;
   font-weight: bold;
-  margin-top: 10px;
+  color: #333; 
+  padding: 10px 15px; 
+  border: 2px solid #4CAF50; 
+  border-radius: 5px; 
+  background-color: #f9f9f9; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  text-align: center; 
+  display: inline-block; 
+  text-transform: uppercase; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
+#user-name:hover {
+  transform: translateX(-10px) scale(1.05); 
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); 
+}
 
 form {
   display: flex;
-  margin-bottom: 10px;
-  gap: 5px;
+  margin: 20px 0;
+  gap: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background-color: #fff; 
+  border-radius: 8px;
 }
 
 form input[type="text"] {
   flex: 1;
-  padding: 8px;
+  padding: 10px;
   font-size: 14px; 
-  border: 2px solid #4caf50;
+  border: 2px solid #4CAF50;
   border-radius: 4px;
   outline: none;
 }
 
 form button {
-  padding: 8px 12px;
+  padding: 10px 15px;
   font-size: 14px;
-  background-color: #4caf50;
+  background-color: #4CAF50;
   color: white;
   border: none;
   border-radius: 4px;
@@ -81,7 +103,7 @@ form button:hover {
 .todo-item {
   display: flex;
   align-items: center;
-  padding: 8px;
+  padding: 10px;
   border-bottom: 1px solid #ddd;
   transition: background-color 0.3s ease;
 }
@@ -91,27 +113,27 @@ form button:hover {
 }
 
 .task-number {
-  width: 16px; 
+  width: 30px; 
   text-align: center;
   flex-shrink: 0;
 }
 
 .task-text {
   flex: 1;
-  margin-left: 5px;
+  margin-left: 10px;
   font-size: 14px;
 }
 
 .task-actions {
   margin-left: auto;
   display: flex;
-  gap: 3px; 
+  gap: 5px; 
 }
 
 .complete-btn,
 .edit-btn,
 .delete-btn {
-  padding: 6px 8px; 
+  padding: 8px 10px; 
   font-size: 12px; 
   color: white;
   border: none;
@@ -156,7 +178,7 @@ footer {
 }
 
 footer button {
-  padding: 6px 12px;
+  padding: 8px 15px;
   font-size: 14px;
   background-color: #f44336;
   color: white;
@@ -170,7 +192,7 @@ footer button {
 footer button:last-child {
   margin-right: 0; 
 }
-footer button#show-button{
+footer button#show-button {
   background-color: #2196F3; 
 }
 
@@ -178,11 +200,11 @@ footer button#show-button:hover {
   background-color: #0D47A1; 
 }
 
-footer button#logout-btn{
+footer button#logout-btn {
   background-color: #F44336; 
 } 
 
-footer button#logout-btn:hover{
+footer button#logout-btn:hover {
   background-color: #E53935; 
 }
 
@@ -192,7 +214,7 @@ footer button:hover {
 
 .edit-input {
   width: 100%;
-  padding: 6px;
+  padding: 10px;
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -207,7 +229,7 @@ footer button:hover {
 
   form {
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
   }
 
   form input[type="text"],
@@ -223,7 +245,7 @@ footer button:hover {
   .edit-btn,
   .delete-btn {
     width: 100%;
-    padding: 6px 8px;
+    padding: 8px 10px;
     font-size: 12px; 
   }
 }
@@ -252,4 +274,3 @@ footer button:hover {
   background-color: #e6f7ff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-
