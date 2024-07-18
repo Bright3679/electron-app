@@ -30,6 +30,22 @@
         const loginName = document.getElementById("user-name");
         const token = localStorage.getItem("token");
 
+        loginName.addEventListener("click", function () {
+          Swal.fire({
+            title: "About",
+            html: `
+              <p>This application helps you manage your tasks efficiently. 
+              You can add, edit, complete, and delete tasks to stay organized.</p>
+              <p>Developed by: Ujjwal Soni</p>
+              <p>Version: 1.0.0</p>
+              <p>GitHub: <a href="https://github.com/Bright3679/electron-app" target="_blank">https://github.com/Bright3679/electron-app</a></p>
+            `,
+            icon: "info",
+            backdrop: false,
+            confirmButtonText: "Close",
+          });
+        });
+
         function logout() {
           localStorage.removeItem("token");
           window.location.href = "./src/pages/login.html";

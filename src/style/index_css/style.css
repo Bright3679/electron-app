@@ -211,6 +211,13 @@ footer button#logout-btn:hover {
 footer button:hover {
   background-color: #e53935;
 }
+footer button#clear-all-btn{
+  background-color: #28a745;
+}
+
+footer button#clear-all-btn:hover{
+  background-color: #218838;
+}
 
 .edit-input {
   width: 100%;
