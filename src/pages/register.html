@@ -4,14 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
-    <link rel="stylesheet" href="../style/auth_css/style.css" />
+    <link rel="stylesheet" href="../style/auth_css/test.css" />
   </head>
 
   <body>
     <div class="login-container">
       <h2>Register</h2>
       <form id="loginForm">
-        <label for="username">Username</label>
         <input
           type="text"
           id="username"
@@ -20,7 +19,14 @@
           autocomplete="off"
           required
         />
-        <label for="password">Password</label>
+        <input
+          type="text"
+          id="email"
+          name="Email"
+          placeholder="Enter your Email"
+          autocomplete="off"
+          required
+        />
         <input
           type="password"
           id="password"
@@ -29,7 +35,6 @@
           autocomplete="off"
           required
         />
-        <label for="confirmPassword">Confirm Password</label>
         <input
           type="password"
           id="confirmPassword"

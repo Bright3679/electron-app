@@ -4,23 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-    <link rel="stylesheet" href="../style/auth_css/style.css" />
+    <link rel="stylesheet" href="../style/auth_css/test.css" />
   </head>
 
   <body>
     <div class="login-container">
       <h2>Login</h2>
       <form id="loginForm">
-        <label for="username">Username</label>
         <input
           type="text"
-          id="username"
-          name="username"
-          placeholder="Enter your username"
+          id="usernameOremailid"
+          name="usernameOremailid"
+          placeholder="Enter your Username Or Email"
           autocomplete="off"
           required
         />
-        <label for="password">Password</label>
         <input
           type="password"
           id="password"
@@ -33,12 +31,14 @@
           <input type="checkbox" id="showPassword" /> Show Passwords
         </label>
         <button type="button" id="loginBtn">Login</button>
-        <!-- <button type="button" id="registerBtn">Register</button> -->
         <a href="register.html" title="Register" class="register-link"
           >Click here to Register</a
         >
+        <a href="Forgot Password?" title="Forgot Password?" id="reset-password"
+          >Forgot Password?</a
+        >
       </form>
-      <p id="message"></p>
+      <!-- <p id="message"></p> -->
     </div>
     <script src="../js/authRenderer/loginRenderer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

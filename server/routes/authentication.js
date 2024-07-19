@@ -18,22 +18,28 @@ async function executeQuery(query, params) {
 }
 
 exports.register = async (req, res) => {
-    const { username, password } = req.body;
-    if (!username || !password) {
-        return res.status(400).json({ message: 'Username and password are required' });
+    const { username, password, emailid } = req.body;
+    if (!username || !password || !emailid) {
+        return res.status(400).json({ message: 'Username, Email and password are required' });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(emailid)) {
+        return res.status(400).json({ message: 'Invalid email format' });
     }
 
     try {
-        const existingUser = await executeQuery('SELECT * FROM Persons WHERE name = @username', { username });
+        const existingUser = await executeQuery('SELECT * FROM Persons WHERE name = @username AND emailID = @emailid', { username, emailid });
         if (existingUser.length > 0) {
-            return res.status(400).json({ message: 'Username already exists' });
+            return res.status(400).json({ message: 'User already exists' });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const sessionId = uuidv4();
         await executeQuery(
-            'INSERT INTO Persons (name, password, personID) VALUES (@username, @hashedPassword, @sessionId)',
-            { username, hashedPassword, sessionId }
+            'INSERT INTO Persons (name, password, emailID, personID) VALUES (@username, @hashedPassword ,@emailid ,@sessionId)',
+            { username, hashedPassword, emailid, sessionId }
         );
 
         res.status(201).json({ message: 'User registered successfully' });
@@ -44,27 +50,25 @@ exports.register = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-    const { username, password } = req.body;
-    if (!username || !password) {
-        return res.status(400).json({ message: 'Username and password are required' });
+    const { usernameOremailid, password } = req.body;
+    if (!usernameOremailid || !password) {
+        return res.status(400).json({ message: 'Username/email and password are required' });
     }
 
     try {
-        const user = await executeQuery('SELECT * FROM Persons WHERE name = @username', { username });
+        const user = await executeQuery('SELECT * FROM Persons WHERE name = @usernameOremailid OR emailID = @usernameOremailid', { usernameOremailid });
         if (user.length === 0) {
-            return res.status(401).json({ message: 'Invalid username or password' });
+            return res.status(401).json({ message: 'Invalid Credentials' });
         }
 
         const passwordMatch = await bcrypt.compare(password, user[0].password);
         if (!passwordMatch) {
-            return res.status(401).json({ message: 'Invalid username or password' });
+            return res.status(401).json({ message: 'Invalid Password' });
         }
 
         const token = jwt.sign(
             {
                 personID: user[0].personID,
-                name: user[0].name,
-
             },
             process.env.JWT_SECRET,
             { expiresIn: '1h' }

@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const username = document.getElementById("username");
+    const email = document.getElementById("email");
     const password = document.getElementById("password");
     const confirmPassword = document.getElementById("confirmPassword");
     const showPassword = document.getElementById("showPassword");
@@ -58,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
     registerBtn.addEventListener("click", async () => {
         const usernameValue = username.value;
         const passwordValue = password.value;
+        const emailValue = email.value;
 
         if (usernameValue.length < 3) {
             Swal.fire({
@@ -104,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ username: usernameValue, password: passwordValue })
+                body: JSON.stringify({ username: usernameValue, password: passwordValue, emailid: emailValue })
             });
             const registerData = await response.json();
             if (response.ok) {
@@ -113,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ username: usernameValue, password: passwordValue })
+                    body: JSON.stringify({ usernameOremailid: emailValue, password: passwordValue })
                 })
                 const loginData = await logicResponse.json();
 

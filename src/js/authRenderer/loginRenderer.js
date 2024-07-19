@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const username = document.getElementById("username");
+    const usernameOremailid = document.getElementById("usernameOremailid");
     const password = document.getElementById("password");
     const showPasswordCheckbox = document.getElementById("showPassword");
 
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     loginBtn.addEventListener("click", async () => {
-        const usernameValue = username.value;
+        const usernameORemailValue = usernameOremailid.value;
         const passwordValue = password.value;
 
         try {
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ username: usernameValue, password: passwordValue })
+                body: JSON.stringify({ usernameOremailid: usernameORemailValue, password: passwordValue })
             })
             const data = await response.json();
             if (response.ok) {
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     window.location.href = '../pages/createTask.html'
                 })
             } else {
-                document.getElementById('message').innerText = data.message;
+                // document.getElementById('message').innerText = data.message;
                 Swal.fire({
                     title: "Error",
                     text: data.message,
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         } catch (err) {
             console.error(err);
-            document.getElementById('message').innerText = `Error: ${err.message}`;
+            // document.getElementById('message').innerText = `Error: ${err.message}`;
             Swal.fire({
                 title: "Error",
                 text: err.message,
