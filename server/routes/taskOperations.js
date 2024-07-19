@@ -1,7 +1,7 @@
 const { jwtDecode } = require('jwt-decode');
 const sql = require('mssql');
 const { v4: uuidv4 } = require('uuid');
-require('dotenv').config();
+const jwt = require('jsonwebtoken');
 
 async function executeQuery(query, params) {
     try {
@@ -19,25 +19,21 @@ async function executeQuery(query, params) {
 }
 
 exports.taskInsert = async (req, res) => {
-    const { token, task } = req.body;
+    const { taskToken, task } = req.body;
 
-    if (!token || !task) {
+    if (!taskToken || !task) {
         return res.status(400).send({ message: 'Enter any Task!' });
     }
 
     try {
-        const decodedToken = jwtDecode(token);
-        const personID = decodedToken.personID;
+        const decodedToken = jwtDecode(taskToken);
+        const topicId = decodedToken.topicId;
         const taskID = uuidv4();
 
-        if (!personID) {
-            return res.status(400).send({ message: 'Invalid token' });
-        }
-
-        const insertResult = await sql.query`
-            INSERT INTO Tasks (taskID, taskName, taskCompleted, personID)
-            VALUES (${taskID}, ${task}, 0, ${personID});
-        `;
+        await executeQuery(
+            'INSERT INTO Tasks (taskID, taskName, topicID) VALUES (@taskID, @task, @topicId)',
+            { taskID, task, topicId }
+        );
 
         res.status(200).send({ message: 'Task inserted successfully' });
     } catch (err) {
@@ -47,12 +43,12 @@ exports.taskInsert = async (req, res) => {
 };
 
 exports.gettasks = async (req, res) => {
-    let prId = req.user.personID;
+    let topicID = req.user.topicId;
     try {
         const query =
-            'SELECT taskName FROM Tasks WHERE personID = @prId';
+            'SELECT * FROM Tasks WHERE topicID = @topicID';
         ;
-        const taskDetails = await executeQuery(query, { prId })
+        const taskDetails = await executeQuery(query, { topicID })
 
         if (taskDetails.length === 0) {
             return res.status(404).json({ message: "Task not found" })
@@ -63,6 +59,39 @@ exports.gettasks = async (req, res) => {
     } catch (err) {
         console.error("Error showing Data", err);
         res.status(500).send({ message: 'Error showing Data' })
+    }
+}
+
+exports.createTaskTopic = async (req, res) => {
+    let { topicValue, token } = req.body;
+
+    if (!token || !topicValue) {
+        return res.status(400).send({ message: 'Create any Topic!' });
+    }
+    try {
+        const decodedToken = jwtDecode(token);
+        const PersonID = decodedToken.personID;
+        const topicId = uuidv4();
+
+        if (!PersonID) {
+            return res.status(400).send({ message: 'Invalid token' });
+        }
+
+        await executeQuery('INSERT INTO todoTopics (topicID, topicname, personID) VALUES (@topicId, @topicValue, @PersonID)', {
+            topicId, topicValue, PersonID
+        })
+        const taskToken = jwt.sign(
+            {
+                topicId: topicId
+            },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        )
+        res.status(200).send({ message: 'Task inserted successfully', taskToken });
+
+    } catch (error) {
+        console.error('Error inserting task:', error);
+        res.status(500).send({ message: 'Error inserting task' });
     }
 }
 

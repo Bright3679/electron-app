@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     timerProgressBar: true,
                     showConfirmButton: false
                 }).then(() => {
-                    window.location.href = '../../index.html'
+                    window.location.href = '../pages/createTask.html'
                 })
             } else {
                 document.getElementById('message').innerText = data.message;

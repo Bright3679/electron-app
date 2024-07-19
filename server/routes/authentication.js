@@ -64,7 +64,7 @@ exports.login = async (req, res) => {
             {
                 personID: user[0].personID,
                 name: user[0].name,
-                password: user[0].password
+
             },
             process.env.JWT_SECRET,
             { expiresIn: '1h' }
@@ -80,10 +80,9 @@ exports.login = async (req, res) => {
 exports.getUserDetails = async (req, res) => {
     let userId = req.user.personID;
     let username = req.user.name;
-    let password = req.user.password;
     try {
-        const query = 'SELECT * FROM Persons WHERE personID = @userId AND name = @username AND password = @password';
-        const userDetails = await executeQuery(query, { userId, username, password });
+        const query = 'SELECT * FROM Persons WHERE personID = @userId AND name = @username';
+        const userDetails = await executeQuery(query, { userId, username });
 
         if (userDetails.length === 0) {
             return res.status(404).json({ message: 'User details not found' });

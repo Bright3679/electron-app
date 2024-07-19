@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const showtodoBtn = document.getElementById('show-button');
 
     const token = localStorage.getItem('token');
+    const taskToken = localStorage.getItem('taskToken');
 
     showtodoBtn.addEventListener('click', async () => {
         window.location.href = 'src/pages/showTasks.html';
@@ -14,12 +15,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
     const fetchedTaskNames = new Set();
-    if (token) {
+    if (taskToken) {
         try {
             const response = await fetch('http://localhost:3000/api/gettasks', {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${taskToken}`
                 }
             });
             if (!response.ok) {
@@ -84,7 +85,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ token, task })
+                body: JSON.stringify({ taskToken, task })
             })
             const data = await response.json();
 

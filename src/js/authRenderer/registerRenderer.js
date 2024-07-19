@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         showConfirmButton: false
                     }).then(() => {
                         // window.location.href = '../pages/login.html';
-                        window.location.href = '../../index.html'
+                        window.location.href = '../pages/createTask.html'
                     });
                 } else {
                     message.innerText = loginData.message;

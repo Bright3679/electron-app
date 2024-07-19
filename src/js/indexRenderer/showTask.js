@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const backBtn = document.getElementById('Back');
     const downloadBtn = document.getElementById('Download');
+    const taskToken = localStorage.getItem('taskToken')
 
     downloadBtn.addEventListener('click', function () {
         const { jsPDF } = window.jspdf;
@@ -29,12 +30,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const token = localStorage.getItem('token');
 
-    if (token) {
+    if (taskToken) {
         try {
             const response = await fetch('http://localhost:3000/api/gettasks', {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${taskToken}`
                 }
             });
 

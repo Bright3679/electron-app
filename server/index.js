@@ -12,6 +12,7 @@ router.get('/getUserDetails', authenticationCtrl.authenticateToken, authenticati
 //Task Operations
 router.post('/insertTask', todoTasks.taskInsert)
 router.get('/gettasks', authenticationCtrl.authenticateToken, todoTasks.gettasks)
+router.post('/createTaskTopic', todoTasks.createTaskTopic)
 // router.delete('/deleteTask', authenticationCtrl.authenticateToken, todoTasks.deleteTask)
 
 module.exports = router;
