@@ -37,7 +37,22 @@ header {
 }
 
 header h1 {
-  font-size: 24px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  padding: 8px 12px;
+  border: 1px solid #4CAF50;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: inline-block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+header h1:hover {
+  transform: translateX(-10px) scale(1.05);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 

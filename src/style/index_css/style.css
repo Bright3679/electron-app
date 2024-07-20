@@ -14,52 +14,82 @@ body {
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   width: 90%;
-  height: 80vh;
+  height: 90vh; /* Increased height */
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
 header {
-  background-color: #4CAF50; 
+  background-color: #4CAF50;
   padding: 0.5px 20px;
-  border-radius: 8px 8px 8px 8px; 
+  border-radius: 8px;
   position: sticky;
   top: 0;
   z-index: 1;
   display: flex;
-  justify-content: space-between; 
-  align-items: center; 
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-
 header h1 {
-  margin: 0;
-  font-size: 24px;
-  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  padding: 8px 12px;
+  border: 1px solid #4CAF50;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: inline-block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+header h1:hover {
+  transform: translateX(-10px) scale(1.05);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 #user-name {
   font-size: auto;
   font-weight: bold;
-  color: #333; 
+  color: #333;
   padding: 8px 12px;
   border: 1px solid #4CAF50;
   border-radius: 4px;
-  background-color: #f9f9f9; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-  text-align: center; 
-  display: inline-block; 
-  text-transform: uppercase; 
-  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: inline-block;
+  text-transform: uppercase;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-
 #user-name:hover {
-  transform: translateX(-10px) scale(1.05); 
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); 
-  font-size: auto; 
+  transform: translateX(-10px) scale(1.05);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  font-size: auto;
+}
+
+#about {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  padding: 8px 12px;
+  border: 1px solid #4CAF50;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: inline-block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#about:hover {
+  transform: translateX(-10px) scale(1.05);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 form {
@@ -68,14 +98,14 @@ form {
   gap: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
-  background-color: #fff; 
+  background-color: #fff;
   border-radius: 8px;
 }
 
 form input[type="text"] {
   flex: 1;
   padding: 10px;
-  font-size: 14px; 
+  font-size: 14px;
   border: 2px solid #4CAF50;
   border-radius: 4px;
   outline: none;
@@ -107,7 +137,7 @@ form button:hover {
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid #ddd;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .todo-item:nth-child(even) {
@@ -115,7 +145,7 @@ form button:hover {
 }
 
 .task-number {
-  width: 30px; 
+  width: 30px;
   text-align: center;
   flex-shrink: 0;
 }
@@ -129,14 +159,14 @@ form button:hover {
 .task-actions {
   margin-left: auto;
   display: flex;
-  gap: 5px; 
+  gap: 5px;
 }
 
 .complete-btn,
 .edit-btn,
 .delete-btn {
-  padding: 8px 10px; 
-  font-size: 12px; 
+  padding: 8px 10px;
+  font-size: 12px;
   color: white;
   border: none;
   border-radius: 4px;
@@ -176,13 +206,16 @@ form button:hover {
 footer {
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
+  margin-top: 0;
+  position: relative;
+  padding: 20px;
+  /* box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 4px; */
 }
 
 footer button {
   padding: 8px 15px;
   font-size: 14px;
-  background-color: #f44336;
   color: white;
   border: none;
   border-radius: 4px;
@@ -192,33 +225,44 @@ footer button {
 }
 
 footer button:last-child {
-  margin-right: 0; 
+  margin-right: 0;
 }
+
 footer button#show-button {
-  background-color: #2196F3; 
+  background-color: #2196F3;
 }
 
 footer button#show-button:hover {
-  background-color: #0D47A1; 
+  background-color: #0D47A1;
 }
 
 footer button#logout-btn {
-  background-color: #F44336; 
-} 
+  background-color: #F44336;
+}
 
 footer button#logout-btn:hover {
-  background-color: #E53935; 
+  background-color: #E53935;
 }
 
-footer button:hover {
-  background-color: #e53935;
-}
-footer button#clear-all-btn{
+footer button#clear-all-btn {
   background-color: #28a745;
 }
 
-footer button#clear-all-btn:hover{
+footer button#clear-all-btn:hover {
   background-color: #218838;
+}
+
+footer p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 20px);
+  box-sizing: border-box;
 }
 
 .edit-input {
@@ -233,7 +277,7 @@ footer button#clear-all-btn:hover{
 @media (max-width: 600px) {
   .todo-container {
     padding: 10px;
-    height: 80vh;
+    height: 90vh; /* Adjusted height for mobile view */
   }
 
   form {
@@ -255,7 +299,7 @@ footer button#clear-all-btn:hover{
   .delete-btn {
     width: 100%;
     padding: 8px 10px;
-    font-size: 12px; 
+    font-size: 12px;
   }
 }
 

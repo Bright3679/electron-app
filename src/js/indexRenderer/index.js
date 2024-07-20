@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const logoutBtn = document.getElementById('logout-btn')
     const showtodoBtn = document.getElementById('show-button');
 
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
     const taskToken = localStorage.getItem('taskToken');
 
     showtodoBtn.addEventListener('click', async () => {

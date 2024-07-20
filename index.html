@@ -12,6 +12,7 @@
       <header>
         <h1>Todo List</h1>
         <p id="user-name"></p>
+        <p id="about">About</p>
       </header>
       <form id="todo-form">
         <input type="text" id="todo-input" placeholder="Add a new task" />
@@ -19,6 +20,7 @@
       </form>
       <div class="todo-list" id="todo-list"></div>
       <footer>
+        <p id="subject">Todo List for:</p>
         <button type="button" id="show-button">Show your Todo-List</button>
         <button type="button" id="logout-btn">Logout</button>
         <button type="button" id="clear-all-btn">Clear All</button>
@@ -28,13 +30,17 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const loginName = document.getElementById("user-name");
-        const token = localStorage.getItem("token");
+        const about = document.getElementById("about");
+        const subject = document.getElementById("subject");
 
-        loginName.addEventListener("click", function () {
+        const token = localStorage.getItem("token");
+        const taskTopic = localStorage.getItem("taskTopic");
+
+        about.addEventListener("click", function () {
           Swal.fire({
             title: "About",
             html: `
-              <p>This application helps you manage your tasks efficiently. 
+              <p>This application helps you manage your tasks efficiently.
               You can add, edit, complete, and delete tasks to stay organized.</p>
               <p>Developed by: Ujjwal Soni</p>
               <p>Version: 1.0.0</p>
@@ -45,6 +51,8 @@
             confirmButtonText: "Close",
           });
         });
+
+        subject.textContent = `Todo List for : ${taskTopic}`;
 
         function logout() {
           localStorage.removeItem("token");

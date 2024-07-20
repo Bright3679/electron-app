@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.json();
             if (response.ok) {
                 localStorage.setItem("taskToken", data.taskToken)
+                localStorage.setItem("taskTopic", topicValue)
                 Swal.fire({
                     text: "Task Created!",
                     icon: "success",
