@@ -60,6 +60,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 localStorage.removeItem('token');
+                localStorage.removeItem('taskTopic');
+                localStorage.removeItem('taskToken');
                 window.location.href = 'src/pages/login.html';
             }
         });

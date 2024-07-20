@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const resetForm = document.getElementById('forgotPasswordForm');
     const newPassword = document.getElementById('newPassword');
     const confirmPassword = document.getElementById('confirmPassword');
-    const showPassword = document.getElementById('showPass');
+    const showPassword = document.getElementById('showPassword');
 
     showPassword.addEventListener("change", function () {
         const type = showPassword.checked ? "text" : "password";
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    email,
+                    email: email,
                     newPassword: newPasswordValue
                 })
             });

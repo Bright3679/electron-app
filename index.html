@@ -10,7 +10,7 @@
   <body>
     <div class="todo-container">
       <header>
-        <h1>Todo List</h1>
+        <h1 id="todo">Todo List</h1>
         <p id="user-name"></p>
         <p id="about">About</p>
       </header>
@@ -32,6 +32,8 @@
         const loginName = document.getElementById("user-name");
         const about = document.getElementById("about");
         const subject = document.getElementById("subject");
+        const todo = document.getElementById("todo");
+        const taskToken = localStorage.getItem("taskToken");
 
         const token = localStorage.getItem("token");
         const taskTopic = localStorage.getItem("taskTopic");
@@ -52,30 +54,55 @@
           });
         });
 
+        todo.addEventListener("click", function () {
+          Swal.fire({
+            text: "Create a new List?",
+            icon: "question",
+            backdrop: false,
+            showCancelButton: true,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "./src/pages/createTask.html";
+            }
+          });
+        });
+
         subject.textContent = `Todo List for : ${taskTopic}`;
 
         function logout() {
           localStorage.removeItem("token");
+          localStorage.removeItem("taskToken");
           window.location.href = "./src/pages/login.html";
         }
 
         function checkTokenExpiration() {
-          if (!token) {
-            logout();
-            return;
-          }
+          try {
+            if (!token || !taskToken) {
+              logout();
+              return;
+            }
+            const tokenPayload = JSON.parse(atob(token.split(".")[1]));
+            const taskTokenPayload = JSON.parse(atob(taskToken.split(".")[1]));
 
-          const payload = JSON.parse(atob(token.split(".")[1]));
-          const expiration = payload.exp * 1000;
+            const tokenExpiration = tokenPayload.exp * 1000;
+            const taskTokenExpiration = taskTokenPayload.exp * 1000;
 
-          if (Date.now() >= expiration) {
-            alert("Your Session has expired!");
+            if (
+              Date.now() >= tokenExpiration ||
+              Date.now() >= taskTokenExpiration
+            ) {
+              alert("Your Session has expired!");
+              logout();
+            } else {
+              loginName.textContent = `Welcome, ${tokenPayload.name}!`;
+            }
+          } catch (error) {
+            console.error("Error decoding token:", error);
+            console.log("You are been logout! for Security Purpose");
+            alert("You are been logout! for Security Purpose");
             logout();
-          } else {
-            loginName.textContent = `Welcome, ${payload.name}`;
           }
         }
-
         checkTokenExpiration();
       });
     </script>

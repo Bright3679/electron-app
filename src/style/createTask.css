@@ -5,7 +5,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #d5f0f3;
+    background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
   }
   .task-form {
     background: #fff;
