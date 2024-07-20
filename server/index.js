@@ -8,6 +8,7 @@ const authenticationCtrl = require('../middlewares/authenticationCtrl')
 router.post('/login', authentication.login);
 router.post('/register', authentication.register)
 router.get('/getUserDetails', authenticationCtrl.authenticateToken, authentication.getUserDetails)
+router.post('/resetPassword', authentication.ResetPassword)
 
 //Task Operations
 router.post('/insertTask', todoTasks.taskInsert)

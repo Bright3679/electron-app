@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
+const sql = require("mssql")
 
 async function executeQuery(query, params) {
     try {
@@ -69,6 +70,7 @@ exports.login = async (req, res) => {
         const token = jwt.sign(
             {
                 personID: user[0].personID,
+                name: user[0].name
             },
             process.env.JWT_SECRET,
             { expiresIn: '1h' }
@@ -99,3 +101,30 @@ exports.getUserDetails = async (req, res) => {
     }
 };
 
+exports.ResetPassword = async (req, res) => {
+    const { newPassword, email } = req.body;
+
+    if (!newPassword || !email) {
+        return res.status(400).json({ success: false, message: 'New Password and email are required!' });
+    }
+
+    try {
+        const checkEmail = 'SELECT personID FROM Persons WHERE emailID = @email';
+
+        const result = await executeQuery(checkEmail, { email });
+
+        if (result.length === 0) {
+            return res.status(404).json({ success: false, message: 'Email not found' });
+        }
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        const updatePassword = 'UPDATE Persons SET password = @hashedPassword WHERE emailID = @email';
+
+        await executeQuery(updatePassword, { hashedPassword, email });
+
+        res.status(200).json({ success: true, message: 'Password reset successfully' });
+    } catch (error) {
+        console.error('SQL error', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+};

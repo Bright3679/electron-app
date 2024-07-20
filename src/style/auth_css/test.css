@@ -81,18 +81,18 @@ body {
   .login-container button {
     border: none;
     border-radius: 6px;
-    background-color: #ff5722; /* New button color */
+    background-color: #ff5722; 
     color: white;
     font-size: 16px;
     cursor: pointer;
     padding: 12px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Added shadow effect */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
   }
   
   .login-container button:hover {
-    background-color: #e64a19; /* Darker shade on hover */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow effect */
+    background-color: #e64a19; 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); 
   }
   
   .register-link,
@@ -108,23 +108,23 @@ body {
   }
   
   .register-link {
-    background-color: #4caf50; /* Register button color */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Added shadow effect */
+    background-color: #4caf50; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
   
   .register-link:hover {
-    background-color: #388e3c; /* Darker shade on hover */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow effect */
+    background-color: #388e3c; 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
   }
   
   .login-link {
-    background-color: #66a6ff; /* Login button color */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Added shadow effect */
+    background-color: #66a6ff; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
   }
   
   .login-link:hover {
-    background-color: #5691d8; /* Darker shade on hover */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow effect */
+    background-color: #5691d8; 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); 
   }
   
   label {
@@ -145,3 +145,14 @@ body {
     margin-top: 10px;
   }
   
+  #reset-password {
+    display: block;
+    margin-top: 5px;
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  #reset-password:hover {
+    text-decoration: underline;
+  }
