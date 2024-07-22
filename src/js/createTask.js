@@ -1,6 +1,43 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function (event) {
+    event.preventDefault();
     const topicname = document.getElementById("taskTopic")
     const token = localStorage.getItem('token')
+
+    async function fetchTopics() {
+        try {
+            const response = await fetch('http://localhost:3000/api/getTopicsName', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch topics');
+            }
+            const result = await response.json();
+            const topicsList = document.getElementById('topics');
+            topicsList.innerHTML = '';
+            result.data.forEach(topic => {
+                const listItem = document.createElement('li');
+                listItem.textContent = topic.topicName;
+                topicsList.appendChild(listItem);
+            });
+        } catch (error) {
+            console.error('Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Failed to fetch topics. Please try again later.',
+                backdrop: false,
+                timer: 1000,
+                showConfirmButton: false
+
+            });
+        }
+    }
+
+    fetchTopics();
+
     topicBtn.addEventListener("click", async () => {
         const topicValue = topicname.value.trim();
 

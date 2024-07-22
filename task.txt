@@ -1,0 +1,6 @@
+delete and edit api
+show topics in teh create task html
+calender option of reminder
+shifting field by pressing enter 
+option on clicking todo list of save and not to save
+clicking complete funciton

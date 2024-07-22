@@ -77,6 +77,14 @@ exports.createTaskTopic = async (req, res) => {
             return res.status(400).send({ message: 'Invalid token' });
         }
 
+        const existingTopic = await executeQuery('SELECT topicName FROM todoTopics WHERE topicName = @topicValue AND personID = @personID', {
+            topicValue, PersonID
+        });
+
+        if (existingTopic.length > 0) {
+            return res.status(400).send({ message: 'Topic already exists' });
+        }
+
         await executeQuery('INSERT INTO todoTopics (topicID, topicname, personID) VALUES (@topicId, @topicValue, @PersonID)', {
             topicId, topicValue, PersonID
         })
@@ -95,15 +103,19 @@ exports.createTaskTopic = async (req, res) => {
     }
 }
 
+exports.getTopicsName = async (req, res) => {
+    let personID = req.user.personID;
 
-// exports.deleteTask = async (req, res) => {
-//     let prId = req.user.personID;
-//     try {
-//         const query = 'DELETE TaskName FROM Tasks WHERE personID = @prId';
-//         const updatedtask = await executeQuery(query, { prId })
-//         return res.status(200).send({ data: updatedtask });
-//     } catch (err) {
-//         console.error("Error showing Data", err);
-//         res.status(500).send({ message: 'Error showing Data' })
-//     }
-// }
+    try {
+        const data = await executeQuery('SELECT topicName FROM todoTopics WHERE personID = @personID', { personID });
+        if (data.length === 0) {
+            return res.status(404).json({ message: "Task not found" })
+        }
+
+        res.set('Cache-Control', 'no-store');
+        return res.status(200).send({ data: data });
+    } catch (error) {
+        console.error("Error showing Data", error);
+        res.status(500).send({ message: 'Error showing Data' })
+    }
+}

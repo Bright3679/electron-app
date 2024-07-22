@@ -14,6 +14,6 @@ router.post('/resetPassword', authentication.ResetPassword)
 router.post('/insertTask', todoTasks.taskInsert)
 router.get('/gettasks', authenticationCtrl.authenticateToken, todoTasks.gettasks)
 router.post('/createTaskTopic', todoTasks.createTaskTopic)
-// router.delete('/deleteTask', authenticationCtrl.authenticateToken, todoTasks.deleteTask)
+router.get('/getTopicsName', authenticationCtrl.authenticateToken, todoTasks.getTopicsName)
 
 module.exports = router;
